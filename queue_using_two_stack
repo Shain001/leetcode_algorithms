@@ -1,0 +1,36 @@
+"""
+    using two stacks to achieve a queue.
+"""
+
+
+class Queue:
+    def __init__(self):
+        # using A to store the value when new item added
+        self.A = []
+        # using B to store the reverse of A and do the delete action
+        self.B = []
+
+    def add(self, num):
+        self.A.append(num)
+
+    def delete_head(self):
+        while len(self.A) is not 0:
+            # reverse the A and store it in B, so the bottom of the stack A becomes top of stack B
+            self.B.append(self.A.pop())
+        if len(self.B) is not 0:
+            return self.B.pop()
+        else:
+            return -1
+
+
+q = Queue()
+q.add(1)
+q.add(2)
+q.add(3)
+print(q.delete_head())
+print(q.delete_head())
+print(q.delete_head())
+print(q.delete_head())
+print(q.delete_head())
+
+
