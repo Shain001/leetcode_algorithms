@@ -1,27 +1,17 @@
-"""
-    binary search implementation;
-    @:input: sorted list
-    @:return: number of target
-"""
+def binary_search(li, target):
+    if len(li) == 0:
+        return False
+
+    mid = len(li)//2
+    left = li[:mid]
+    right = li[mid+1:]
+    if li[mid] == target:
+        return True
+    elif li[mid] < target:
+        return binary_search(right, target)
+    else:
+        return binary_search(left,target)
 
 
-def binary_search(nums, target):
-    """
-            :type nums: List[int]
-            :type target: int
-            :rtype: int
-    """
-    left, right = 0, len(num) - 1
-    while left <= right:
-        pivot = left + (right - left) // 2
-        if target == nums[pivot]:
-            return pivot
-        elif target < nums[pivot]:
-            right = pivot - 1
-        else:
-            left = pivot + 1
-    return left
 
-
-num = [1, 2, 3, 5, 9]
-print(binary_search(num,10))
+print(binary_search([1,2,3,4,5,6,7,8], 8))

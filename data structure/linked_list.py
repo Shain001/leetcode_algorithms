@@ -1,118 +1,72 @@
-"""
-    One Way Linked List
-"""
-
-
 class Node:
-    def __init__(self, value):
+    def __init__(self, value = None):
         self.value = value
-
-    def __str__(self):
-        return str(self.value)
+        self.next = None
 
 
 class LinkedList:
-    head = None
-    tail = None
-
     def __init__(self):
-        self.head = None
-        self.tail = None
-        self.count = 0
+        self.head = Node()
+        self.size = 0
+
+    def get_tail(self):
+        node = self.head
+        while node.next is not None:
+            node = node.next
+        return node
 
     def append(self, value):
-        node = Node(value)
-        self.count += 1
-        if self.head is None:
-            self.head = node
-            self.tail = node
+        if self.size == 0:
+            self.head.next = Node(value)
+            self.size += 1
         else:
-            self.tail.next = node
-            self.tail = node
-
-    def add_to_head(self, value):
-        node = Node(value)
-        self.count += 1
-        if self.head is None:
-            self.head = node
-        node.next = self.head
-        self.head = node
-
-    def remove_at_index(self, target_index):
-        if target_index > self.count-1:
-            return "index out of range"
-        if self.head is None:
-            return "Empty!"
-
-        current_node = self.head
-        # index = 0
-        #
-        # while index != target_index:
-        #     if index == target_index-1:
-        #         to_be_removed = current_node.next
-        #         new_next = to_be_removed.next
-        #         current_node.next = new_next
-        #         index += 1
-        #     else:
-        #         index += 1
-        #         current_node = current_node.next
-
-        for i in range(target_index-1):
-            current_node = current_node.next
-        current_node.next = current_node.next.next
-
-    def remove_head(self):
-        if self.head is None:
-            return
-
-        self.count -= 1
-        self.head = self.head.next
-
-    def remove_tail(self):
-        if self.head is None:
-            return
-
-        self.count -= 1
-        current_node = self.head
-        for i in range(self.count-1):
-            current_node = current_node.next
-        current_node.next = None
-
-    def add_to_index(self, target_index, value):
-        if target_index > self.count-1 or target_index < 0:
-            return "index out of range"
-
-        node = Node(value)
-
-        self.count += 1
-        current_node = self.head
-        for i in range(target_index):
-            current_node = current_node.next
-
-        node.next = current_node.next
-        current_node.next = node
-
-    def get(self, target_index):
-        if target_index > self.count-1:
-            return
-
-        current_node = self.head
-        for i in range(target_index-1):
-            current_node = current_node.next
-        return current_node.next.value
+            self.get_tail().next = Node(value)
+            self.size += 1
 
     def __str__(self):
-        current_node = self.head
-        result = []
-        while current_node is not None:
-            result.append(current_node.value)
-            current_node = current_node.next
-        return str(result)
+        values = []
+        if self.size == 0:
+            return "empty"
+        node = self.head.next
+        while node.next is not None:
+            values.append(node.value)
+            node = node.next
+        values.append(node.value)
+        return str(values)
+
+    def reverse(self, curr):
+        """
+            In one word, when you do the recursive method:
+            1. Identify the function of this method and 'identify the return value' --> 反转每个node, 返回一个node
+            2. Identify the basic return condition --> 找到最后一个node
+            3. Then the function part(pre = .. pre.next = ..) 会被倒序执行，即从最后一个node开始执行
+            4. Therefore, we just need to identify what is the process that each node (or from higher level, each elements)
+               should be implemented
+            5. Also one thing is important is to identify the first returned element
+            此问题中：
+            目的为反转列表， 最先返回的是倒数第一个node，且每个node的执行操作都一致：
+            即将后一个node 的next设为前一个node，即程序中的当前node， 然后将程序中的当前node的next指针清0
+        """
+        if curr.next is None:
+            # 更新头指针，使其指向新的头节点
+            self.head.next = curr
+            return curr
+        # 程序会卡在这里，反复调用自己，直到找到最后一个node
+        # 找到之后，pre会从最后一个node开始，依次变成前一个node,而不是再此调用自己，这就是为什么curr.next为null了
+        # 但是不会再此执行if
+        next_node_in_unreversed = self.reverse(curr.next)
+        next_node_in_unreversed.next = curr
+        curr.next = None
+
+        return curr
 
 
 li = LinkedList()
-li.append(1)
-li.append(2)
+li.append(5)
+li.append(4)
 li.append(3)
-li.remove_tail()
-print(li.get(1))
+li.append(2)
+li.append(1)
+li.reverse(li.head.next)
+print(li)
+
