@@ -25,3 +25,6 @@ def partition(li, left, right):
 
 
 print(quick_sort_entry([0, 3, 5, 1, 4, 8]))
+
+
+

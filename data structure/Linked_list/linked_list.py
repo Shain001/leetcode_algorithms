@@ -68,5 +68,4 @@ li.append(3)
 li.append(2)
 li.append(1)
 li.reverse(li.head.next)
-print(li)
 

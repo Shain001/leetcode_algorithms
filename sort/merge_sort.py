@@ -21,5 +21,8 @@ def merge(left, right):
     return result
 
 
-print(merge_sort([2, 0, 1, -3,4]))
+a = [2, 0, 1, -3,4]
+print(merge_sort(a))
+
+
 

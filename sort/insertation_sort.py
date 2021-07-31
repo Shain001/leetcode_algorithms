@@ -18,4 +18,3 @@ def insert_sort(li):
     return li
 
 
-print(insert_sort([1, 3, 2, 9, 5]))
