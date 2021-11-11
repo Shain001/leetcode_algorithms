@@ -1,0 +1,149 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib import gridspec
+from matplotlib import ticker
+from matplotlib import rcParams
+from datetime import timedelta
+import numpy as np
+
+df_60 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-5per.txt', sep=" ", header = None)
+df_80 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-10per.txt', sep=" ", header = None)
+df_100 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-15per.txt', sep=" ", header = None)
+df_120 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-20per.txt', sep=" ", header = None)
+df_140 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-25per.txt', sep=" ", header = None)
+
+
+# 60
+weight_vt_60 = df_60[0].mean()
+fuel_vt_60 = df_60[1].mean()
+time_vt_60 = df_60[2].mean()
+
+weight_avg_60 = df_60[3].mean()
+fuel_avg_60 = df_60[4].mean()
+time_avg_60 = df_60[5].mean()
+
+weight_d_60 = df_60[6].mean()
+fuel_d_60 = df_60[7].mean()
+time_d_60 = df_60[8].mean()
+
+weight_lt_60 = df_60[9].mean()
+fuel_lt_60 = df_60[10].mean()
+time_lt_60 = df_60[11].mean()
+
+# 80
+weight_vt_80 = df_80[0].mean()
+fuel_vt_80 = df_80[1].mean()
+time_vt_80 = df_80[2].mean()
+
+weight_avg_80 = df_80[3].mean()
+fuel_avg_80 = df_80[4].mean()
+time_avg_80 = df_80[5].mean()
+
+weight_d_80 = df_80[6].mean()
+fuel_d_80 = df_80[7].mean()
+time_d_80 = df_80[8].mean()
+
+weight_lt_80 = df_80[9].mean()
+fuel_lt_80 = df_80[10].mean()
+time_lt_80 = df_80[11].mean()
+
+# 100
+weight_vt_100 = df_100[0].mean()
+fuel_vt_100 = df_100[1].mean()
+time_vt_100 = df_100[2].mean()
+
+weight_avg_100 = df_100[3].mean()
+fuel_avg_100 = df_100[4].mean()
+time_avg_100 = df_100[5].mean()
+
+weight_d_100 = df_100[6].mean()
+fuel_d_100 = df_100[7].mean()
+time_d_100 = df_100[8].mean()
+
+weight_lt_100 = df_100[9].mean()
+fuel_lt_100 = df_100[10].mean()
+time_lt_100 = df_100[11].mean()
+
+# 120
+weight_vt_120 = df_120[0].mean()
+fuel_vt_120 = df_120[1].mean()
+time_vt_120 = df_120[2].mean()
+
+weight_avg_120 = df_120[3].mean()
+fuel_avg_120 = df_120[4].mean()
+time_avg_120 = df_120[5].mean()
+
+weight_d_120 = df_120[6].mean()
+fuel_d_120 = df_120[7].mean()
+time_d_120 = df_120[8].mean()
+
+weight_lt_120 = df_120[9].mean()
+fuel_lt_120 = df_120[10].mean()
+time_lt_120 = df_120[11].mean()
+
+# 140
+weight_vt_140 = df_140[0].mean()
+fuel_vt_140 = df_140[1].mean()
+time_vt_140 = df_140[2].mean()
+
+weight_avg_140 = df_140[3].mean()
+fuel_avg_140 = df_140[4].mean()
+time_avg_140 = df_140[5].mean()
+
+weight_d_140 = df_140[6].mean()
+fuel_d_140 = df_140[7].mean()
+time_d_140 = df_140[8].mean()
+
+weight_lt_140 = df_140[9].mean()
+fuel_lt_140 = df_140[10].mean()
+time_lt_140 = df_140[11].mean()
+
+x_axis = [5, 10, 15, 20, 25]
+y1 = [fuel_vt_60,fuel_vt_80,fuel_vt_100,fuel_vt_120,fuel_vt_140]
+y2 = [fuel_avg_60,fuel_avg_80,fuel_avg_100,fuel_avg_120,fuel_avg_140]
+y3 = [fuel_d_60,fuel_d_80,fuel_d_100,fuel_d_120,fuel_d_140]
+y4 = [fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120,fuel_lt_140]
+
+# y1 = [weight_vt_60,weight_vt_80,weight_vt_100,weight_vt_120,weight_vt_140]
+# y2 = [weight_avg_60,weight_avg_80,weight_avg_100,weight_avg_120,weight_avg_140]
+# y3 = [weight_d_60,weight_d_80,weight_d_100,weight_d_120,weight_d_140]
+# y4 = [weight_lt_60,weight_lt_80,weight_lt_100,weight_lt_120,weight_lt_140]
+
+# y1 = [time_vt_60,time_vt_80,time_vt_100,time_vt_120,time_vt_140]
+# y2 = [time_avg_60,time_avg_80,time_avg_100,time_avg_120,time_avg_140]
+# y3 = [time_d_60,time_d_80,time_d_100,time_d_120,time_d_140]
+# y4 = [time_lt_60,time_lt_80,time_lt_100,time_lt_120,time_lt_140]
+
+
+plt.plot(x_axis, y1, marker='o', label="VT-CPFM Model")
+plt.plot(x_axis, y2, marker='o', label="Mesoscopic Model")
+plt.plot(x_axis, y3, marker='o', label="Dijkstra Routing Model")
+plt.plot(x_axis, y4, marker='o', label="Lowest Time Model")
+plt.xticks(x_axis)
+plt.xlabel("Travel Distance (KM)")
+plt.ylabel("Fuel Consumption (L)")
+plt.ylim(ymin = 0)
+plt.legend()
+
+plt.plot(x_axis, y2)
+plt.title("Fuel Consumption Comparison for Case 3")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

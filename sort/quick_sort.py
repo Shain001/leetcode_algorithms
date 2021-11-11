@@ -24,7 +24,7 @@ def partition(li, left, right):
     return left
 
 
-print(quick_sort_entry([0, 3, 5, 1, 4, 8]))
+print(quick_sort_entry([3,1,7,6,5,9,12,18,2]))
 
 
 

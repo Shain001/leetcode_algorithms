@@ -430,16 +430,11 @@ def brokenaxes(*args, **kwargs):
     return BrokenAxes(*args, **kwargs)
 
 
-df1 = pd.read_csv('E:\\MinorThesisVS\\see-me-percentage-0per.txt.txt', sep=" ", header = None)
-
-print(df1)
-
-
-df_60 = df1[(df1[6] > 55) & (df1[6] < 65)]
-df_80 = df1[(df1[6] > 75) & (df1[6] < 85)]
-df_100 = df1[(df1[6] > 95) & (df1[6] < 105)]
-df_120 = df1[(df1[6] > 115) & (df1[6] < 125)]
-df_140 = df1[(df1[6] > 135) & (df1[6] < 145)]
+df_60 = pd.read_csv('E:\\MinorThesis\\exp\\v4\\see-me-cricle\\60.txt', sep=" ", header = None)
+df_80 = pd.read_csv('E:\\MinorThesis\\exp\\v4\\see-me-cricle\\80.txt', sep=" ", header = None)
+df_100 = pd.read_csv('E:\\MinorThesis\\exp\\v4\\see-me-cricle\\100.txt', sep=" ", header = None)
+df_120 = pd.read_csv('E:\\MinorThesis\\exp\\v4\\see-me-cricle\\120.txt', sep=" ", header = None)
+df_140 = pd.read_csv('E:\\MinorThesis\\exp\\v4\\see-me-cricle\\see-me-circle-20per-140.txt', sep=" ", header = None)
 
 # 60
 weight_vt_60 = df_60[0].mean()
@@ -527,20 +522,20 @@ fuel_lt_140 = df_140[10].mean()
 time_lt_140 = df_140[11].mean()
 
 x_axis = [60, 80, 100, 120, 140]
-y1 = [fuel_vt_60,fuel_vt_80,fuel_vt_100,fuel_vt_120,fuel_vt_140]
-y2 = [fuel_avg_60,fuel_avg_80,fuel_avg_100,fuel_avg_120,fuel_avg_140]
-y3 = [fuel_d_60,fuel_d_80,fuel_d_100,fuel_d_120,fuel_d_140]
-y4 = [fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120,fuel_lt_140]
+vt_fuel = [fuel_vt_60,fuel_vt_80,fuel_vt_100,fuel_vt_120,fuel_vt_140]
+avg_fuel = [fuel_avg_60,fuel_avg_80,fuel_avg_100,fuel_avg_120,fuel_avg_140]
+d_fuel = [fuel_d_60,fuel_d_80,fuel_d_100,fuel_d_120,fuel_d_140]
+lt_fuel = [fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120,fuel_lt_140]
 
-# y1 = [weight_vt_60,weight_vt_80,weight_vt_100,weight_vt_120,weight_vt_140]
-# y2 = [weight_avg_60,weight_avg_80,weight_avg_100,weight_avg_120,weight_avg_140]
-# y3 = [weight_d_60,weight_d_80,weight_d_100,weight_d_120,weight_d_140]
-# y4 = [weight_lt_60,weight_lt_80,weight_lt_100,weight_lt_120,weight_lt_140]
+vt_d = [weight_vt_60,weight_vt_80,weight_vt_100,weight_vt_120,weight_vt_140]
+avg_d = [weight_avg_60,weight_avg_80,weight_avg_100,weight_avg_120,weight_avg_140]
+d_d = [weight_d_60,weight_d_80,weight_d_100,weight_d_120,weight_d_140]
+lt_d = [weight_lt_60,weight_lt_80,weight_lt_100,weight_lt_120,weight_lt_140]
 
-# y1 = [time_vt_60,time_vt_80,time_vt_100,time_vt_120,time_vt_140]
-# y2 = [time_avg_60,time_avg_80,time_avg_100,time_avg_120,time_avg_140]
-# y3 = [time_d_60,time_d_80,time_d_100,time_d_120,time_d_140]
-# y4 = [time_lt_60,time_lt_80,time_lt_100,time_lt_120,time_lt_140]
+vt_t = [time_vt_60,time_vt_80,time_vt_100,time_vt_120,time_vt_140]
+avg_t = [time_avg_60,time_avg_80,time_avg_100,time_avg_120,time_avg_140]
+d_t = [time_d_60,time_d_80,time_d_100,time_d_120,time_d_140]
+lt_t = [time_lt_60,time_lt_80,time_lt_100,time_lt_120,time_lt_140]
 
 
 # plt.plot(x_axis, y1, marker='o', label="VT-CPFM Model")
@@ -556,44 +551,92 @@ y4 = [fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120,fuel_lt_140]
 # plt.title("The Comparison of Travel Time according to Traffic Signal Circle Time")
 # plt.show()
 
+#fig, axes = plt.subplots(nrows=1,ncols=3, figsize=(15,15))
+# axes[0,1] = bax
 
-
-# bax = brokenaxes(ylims=((0,1),(50,170)), hspace=0.5, despine=False)
-# bax.plot(x_axis, y1, marker='o', label = 'VT Model')
-# bax.plot(x_axis, y2, marker='o', label = 'Mesoscopic Model')
-# bax.plot(x_axis, y3, marker='o', label = 'Dijkstra Model')
-# bax.plot(x_axis, y4, marker='o', label = 'Lowest Time Model')
-# bax.set_xticks(x_axis)
-# bax.set_title('Travel Distance Comparison for Case 2(20% Traffic Signal)')
-# bax.legend(loc=2)
-# bax.set_xlabel('Shortest Distance (KM)')
-# bax.set_ylabel('Travel Distance (KM)')
-# plt.show()
-
-sps1,sps2 = GridSpec(1,2)
-bax = brokenaxes(ylims=((0,1),(5500,13000)), hspace=0.5, despine=False, subplot_spec=sps1)
-bax.plot(x_axis, y1, marker='o', label = 'VT Model')
-bax.plot(x_axis, y2, marker='o', label = 'Mesoscopic Model')
-bax.plot(x_axis, y3, marker='o', label = 'Dijkstra Model')
-bax.plot(x_axis, y4, marker='o', label = 'Lowest Time Model')
+# chart 1
+# sps1,sps2,sps3 = GridSpec(1,3)
+plt.rcParams.update({'font.size': 13})
+bax = brokenaxes(ylims=((0,1),(100,140)), hspace=.05, despine=False)
+bax.plot(x_axis, vt_d, marker='o',markersize=10, label = 'VT Model')
+bax.plot(x_axis, avg_d, marker='v',markersize=10, label = 'Mesoscopic Model')
+bax.plot(x_axis, d_d, marker='s',markersize=10, label = 'Dijkstra Model')
+bax.plot(x_axis, lt_d, marker='*',markersize=10, label = 'Lowest Time Model')
 bax.set_xticks(x_axis)
-bax.set_title('Travel Time Comparison for Case 2 (0% Traffic Signal)')
+# bax.set_title('Travel Distance Comparison')
 bax.legend(loc=2)
-bax.set_xlabel('Travel Distance (KM)')
-bax.set_ylabel('Travel Time (S)')
-
-
-bax = brokenaxes(ylims=((0,0.01),(3,9)), hspace=0.5, despine=False, subplot_spec=sps2)
-bax.plot(x_axis, y1, marker='o', label = 'VT Model')
-bax.plot(x_axis, y2, marker='o', label = 'Mesoscopic Model')
-bax.plot(x_axis, y3, marker='o', label = 'Dijkstra Model')
-bax.plot(x_axis, y4, marker='o', label = 'Lowest Time Model')
-bax.set_xticks(x_axis)
-bax.set_title('Fuel Consumption Comparison (70% Traffic Signal)')
-bax.legend(loc=2)
-bax.set_xlabel('Travel Distance (KM)')
-bax.set_ylabel('Fuel Consumption (L)')
+bax.set_xlabel('Shortest Distance (KM)', labelpad= 20)
+bax.set_ylabel('Travel Distance (KM)')
 plt.show()
+
+
+# chart2
+bax2 = brokenaxes(ylims=((0,1),(9000,11000)), hspace=.05, despine=False)
+bax2.plot(x_axis, vt_t, marker='o',markersize=10, label = 'VT Model')
+bax2.plot(x_axis, avg_t, marker='v',markersize=10, label = 'Mesoscopic Model')
+bax2.plot(x_axis, d_t, marker='s',markersize=10, label = 'Dijkstra Model')
+bax2.plot(x_axis, lt_t, marker='*',markersize=10, label = 'Lowest Time Model')
+bax2.set_xticks(x_axis)
+# bax2.set_title('Travel Time Comparison')
+bax2.legend(loc=2)
+bax2.set_xlabel('Travel Distance (KM)', labelpad= 20)
+bax2.set_ylabel('Travel Time (S)',fontsize=12, labelpad=45)
+plt.show()
+
+
+bax3 = brokenaxes(ylims=((0,0.01),(9,12)), hspace=.05, despine=False)
+bax3.plot(x_axis, vt_fuel, marker='o',markersize=10, label = 'VT Model')
+bax3.plot(x_axis, avg_fuel, marker='v',markersize=10, label = 'Mesoscopic Model')
+bax3.plot(x_axis, d_fuel, marker='s',markersize=10, label = 'Dijkstra Model')
+bax3.plot(x_axis, lt_fuel, marker='*',markersize=10, label = 'Lowest Time Model')
+bax3.set_xticks(x_axis)
+# bax3.set_title('Fuel Consumption Comparison')
+bax3.legend(loc=2)
+bax3.set_xlabel('Travel Distance (KM)', labelpad= 20)
+bax3.set_ylabel('Fuel Consumption (L)', labelpad=40)
+
+# ax1 = plt.subplot(2, 4, 1)
+# bax = brokenaxes(ylims=((0,1),(50,170)), hspace=0.5, despine=False)
+# ax1.plot(x_axis, vt_d, marker='o', label = 'VT Model')
+# ax1.plot(x_axis, avg_d, marker='v', label = 'Mesoscopic Model')
+# ax1.plot(x_axis, d_d, marker='s', label = 'Dijkstra Model')
+# ax1.plot(x_axis, lt_d, marker='*', label = 'Lowest Time Model')
+# ax1.set_xticks(x_axis)
+# ax1.set_title('The Comparison of Travel Distance according to Distance')
+# ax1.legend(loc=2)
+# ax1.set_xlabel('Shortest Distance (KM)')
+# ax1.set_ylabel('Travel Distance (KM)')
+#
+# ax2 = plt.subplot(2,4,2)
+# bax = brokenaxes(ylims=((0,1),(5500,14000)), hspace=0.5, despine=False)
+# ax2.plot(x_axis, vt_t, marker='o', label = 'VT Model')
+# ax2.plot(x_axis, avg_t, marker='v', label = 'Mesoscopic Model')
+# ax2.plot(x_axis, d_t, marker='s', label = 'Dijkstra Model')
+# ax2.plot(x_axis, lt_t, marker='*', label = 'Lowest Time Model')
+# ax2.set_xticks(x_axis)
+# ax2.set_title('The Comparison of Travel Time according to Distance (20% Traffic Signal)')
+# ax2.legend(loc=2)
+# ax2.set_xlabel('Travel Distance (KM)')
+# ax2.set_ylabel('Travel Time (S)')
+#
+#
+# ax3 = plt.subplot(2, 4, 3)
+# bax = brokenaxes(ylims=((0,0.01),(4,13)), hspace=0.5, despine=False)
+# ax3.plot(x_axis, vt_fuel, marker='o', label = 'VT Model')
+# ax3.plot(x_axis, avg_fuel, marker='v', label = 'Mesoscopic Model')
+# ax3.plot(x_axis, d_fuel, marker='s', label = 'Dijkstra Model')
+# ax3.plot(x_axis, lt_fuel, marker='*', label = 'Lowest Time Model')
+# ax3.set_xticks(x_axis)
+# ax3.set_title('The Comparison of Fuel Consumption according to Distance (20% Traffic Signal)')
+# ax3.legend(loc=2)
+# ax3.set_xlabel('Travel Distance (KM)')
+# ax3.set_ylabel('Fuel Consumption (L)')
+
+# plt.suptitle('Experiment Result - Performance Comparison under Different Travel Signal Circle Time (20% Traffic Signal)')
+
+plt.show()
+
+
 
 
 

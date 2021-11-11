@@ -27,7 +27,7 @@ def dp_subset(li, S):
             if li[i] > j:
                 dp[i, j] = dp[i-1, j]
             else:
-                dp[i, j] = dp[i-1, j-li[i]] or dp[i-1, j]
+                dp[i, j] = dp[i-1, j-li[i]] or dp[i-1, j] # 选与不选
     r, c = dp.shape
     return dp[r-1, c-1]
 

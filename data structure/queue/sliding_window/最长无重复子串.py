@@ -22,28 +22,20 @@ def unrepeated(li):
     return max_length
 
 
-def unrepeated_lower_time_complexity(li):
-    if len(li) == 1:
-        return 1
-    if li == "":
-        return 0
-
+def use_sliding_window(nums):
+    window = []
     max_length = 1
-    literate_start = 0
-    occured = set()
-    temp_max_length = 0
-    for i in range(len(li)):
-        if li[i] not in occured:
-            occured.add(li[i])
-            temp_max_length += 1
+    for i in range(len(nums)):
+        if nums[i] not in window:
+            window.append(nums[i])
         else:
-            occured.add(li[i])
-            temp_max_length = 0
-
-        if temp_max_length > max_length:
-            max_length = temp_max_length
-
+            while nums[i] in window:
+                window.pop(0)
+            window.append(nums[i])
+        max_length = max(max_length, len(window))
     return max_length
 
+
+
 s = "abcccdef"
-print(unrepeated(s))
+print(use_sliding_window(s))
