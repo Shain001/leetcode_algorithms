@@ -430,16 +430,14 @@ def brokenaxes(*args, **kwargs):
     return BrokenAxes(*args, **kwargs)
 
 
-df1 = pd.read_csv('E:\\MinorThesisVS\\see-me-distance-20per.txt', sep=" ", header = None)
-
-print(df1)
+df1 = pd.read_csv('E:\\MinorThesisVS\\publish-distance-result-v2-1124.txt', sep=" ", header = None)
 
 
+df_40 = df1[(df1[6] > 35) & (df1[6] < 45)]
 df_60 = df1[(df1[6] > 55) & (df1[6] < 65)]
 df_80 = df1[(df1[6] > 75) & (df1[6] < 85)]
 df_100 = df1[(df1[6] > 95) & (df1[6] < 105)]
 df_120 = df1[(df1[6] > 115) & (df1[6] < 125)]
-df_140 = df1[(df1[6] > 135) & (df1[6] < 145)]
 
 # 60
 weight_vt_60 = df_60[0].mean()
@@ -510,37 +508,38 @@ fuel_lt_120 = df_120[10].mean()
 time_lt_120 = df_120[11].mean()
 
 # 140
-weight_vt_140 = df_140[0].mean()
-fuel_vt_140 = df_140[1].mean()
-time_vt_140 = df_140[2].mean()
+weight_vt_40 = df_40[0].mean()
+fuel_vt_40 = df_40[1].mean()
+time_vt_40 = df_40[2].mean()
 
-weight_avg_140 = df_140[3].mean()
-fuel_avg_140 = df_140[4].mean()
-time_avg_140 = df_140[5].mean()
+weight_avg_40 = df_40[3].mean()
+fuel_avg_40 = df_40[4].mean()
+time_avg_40 = df_40[5].mean()
 
-weight_d_140 = df_140[6].mean()
-fuel_d_140 = df_140[7].mean()
-time_d_140 = df_140[8].mean()
+weight_d_40 = df_40[6].mean()
+fuel_d_40 = df_40[7].mean()
+time_d_40 = df_40[8].mean()
 
-weight_lt_140 = df_140[9].mean()
-fuel_lt_140 = df_140[10].mean()
-time_lt_140 = df_140[11].mean()
+weight_lt_40 = df_40[9].mean()
+fuel_lt_40 = df_40[10].mean()
+time_lt_40 = df_40[11].mean()
+
 
 x_axis = [60, 80, 100, 120, 140]
-vt_fuel = [fuel_vt_60,fuel_vt_80,fuel_vt_100,fuel_vt_120,fuel_vt_140]
-avg_fuel = [fuel_avg_60,fuel_avg_80,fuel_avg_100,fuel_avg_120,fuel_avg_140]
-d_fuel = [fuel_d_60,fuel_d_80,fuel_d_100,fuel_d_120,fuel_d_140]
-lt_fuel = [fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120,fuel_lt_140]
+vt_fuel = [fuel_vt_40, fuel_vt_60,fuel_vt_80,fuel_vt_100,fuel_vt_120]
+avg_fuel = [fuel_avg_40, fuel_avg_60,fuel_avg_80,fuel_avg_100,fuel_avg_120]
+d_fuel = [fuel_d_40, fuel_d_60,fuel_d_80,fuel_d_100,fuel_d_120]
+lt_fuel = [fuel_lt_40, fuel_lt_60,fuel_lt_80,fuel_lt_100,fuel_lt_120]
 
-vt_d = [weight_vt_60,weight_vt_80,weight_vt_100,weight_vt_120,weight_vt_140]
-avg_d = [weight_avg_60,weight_avg_80,weight_avg_100,weight_avg_120,weight_avg_140]
-d_d = [weight_d_60,weight_d_80,weight_d_100,weight_d_120,weight_d_140]
-lt_d = [weight_lt_60,weight_lt_80,weight_lt_100,weight_lt_120,weight_lt_140]
+vt_d = [weight_vt_40, weight_vt_60,weight_vt_80,weight_vt_100,weight_vt_120]
+avg_d = [weight_avg_40, weight_avg_60,weight_avg_80,weight_avg_100,weight_avg_120]
+d_d = [weight_d_40, weight_d_60,weight_d_80,weight_d_100,weight_d_120]
+lt_d = [weight_lt_40, weight_lt_60,weight_lt_80,weight_lt_100,weight_lt_120]
 
-vt_t = [time_vt_60,time_vt_80,time_vt_100,time_vt_120,time_vt_140]
-avg_t = [time_avg_60,time_avg_80,time_avg_100,time_avg_120,time_avg_140]
-d_t = [time_d_60,time_d_80,time_d_100,time_d_120,time_d_140]
-lt_t = [time_lt_60,time_lt_80,time_lt_100,time_lt_120,time_lt_140]
+vt_t = [time_vt_40, time_vt_60,time_vt_80,time_vt_100,time_vt_120]
+avg_t = [time_avg_40, time_avg_60,time_avg_80,time_avg_100,time_avg_120]
+d_t = [time_d_40, time_d_60,time_d_80,time_d_100,time_d_120]
+lt_t = [time_lt_40, time_lt_60,time_lt_80,time_lt_100,time_lt_120]
 
 
 # plt.plot(x_axis, y1, marker='o', label="VT-CPFM Model")
@@ -559,7 +558,7 @@ lt_t = [time_lt_60,time_lt_80,time_lt_100,time_lt_120,time_lt_140]
 
 # sps1,sps2,sps3 = GridSpec(1,3)
 plt.rcParams.update({'font.size': 14})
-bax = brokenaxes(ylims=((0,1),(50,170)), hspace=0.5, despine=False)
+bax = brokenaxes(ylims=((0,1),(25,125)), hspace=0.5, despine=False)
 bax.plot(x_axis, vt_d, marker='o',markersize=10, label = 'VT Model')
 bax.plot(x_axis, avg_d, marker='s',markersize=10, label = 'Mesoscopic Model')
 bax.plot(x_axis, d_d, marker='v',markersize=10, label = 'Dijkstra Model')
@@ -571,7 +570,7 @@ bax.set_xlabel('Shortest Distance (KM)', labelpad=20)
 bax.set_ylabel('Travel Distance (KM)', labelpad=40)
 plt.show()
 
-bax = brokenaxes(ylims=((0,1),(5500,13000)), hspace=0.5, despine=False)
+bax = brokenaxes(ylims=((0,1),(2000, 7200)), hspace=0.5, despine=False)
 bax.plot(x_axis, vt_t, marker='o',markersize=10, label = 'VT Model')
 bax.plot(x_axis, avg_t, marker='s',markersize=10, label = 'Mesoscopic Model')
 bax.plot(x_axis, d_t, marker='v',markersize=10, label = 'Dijkstra Model')
@@ -584,7 +583,7 @@ bax.set_ylabel('Travel Time (S)', fontsize = 12, labelpad=44)
 plt.show()
 
 
-bax = brokenaxes(ylims=((0,0.01),(5,13)), hspace=0.5, despine=False)
+bax = brokenaxes(ylims=((0, 0.01),(2, 7.5)), hspace=0.5, despine=False)
 bax.plot(x_axis, vt_fuel, marker='o',markersize=10, label = 'VT Model')
 bax.plot(x_axis, avg_fuel, marker='s',markersize=10, label = 'Mesoscopic Model')
 bax.plot(x_axis, d_fuel, marker='v',markersize=10, label = 'Dijkstra Model')
@@ -596,8 +595,9 @@ bax.set_xlabel('Travel Distance (KM)', labelpad=20)
 bax.set_ylabel('Fuel Consumption (L)',40)
 
 # plt.suptitle('Experiment Result - Performance Comparison under Different Travel Distance (20% Traffic Signal)')
-plt.show()
+# plt.show()
 
+print(fuel_vt_120, fuel_avg_120, fuel_d_120, fuel_lt_120)
 
 
 
