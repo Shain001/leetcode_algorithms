@@ -7,5 +7,5 @@ def bubble_sort(li):
                 li[j+1] = temp
     return li
 
-
+print(bubble_sort([1,4,2,9,5,0]))
 

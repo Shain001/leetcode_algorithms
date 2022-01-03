@@ -45,5 +45,9 @@ def jump_loop(n):
 
 
 
+a = [1,3,2,4]
+a.sort()
+print(a)
+
 
 

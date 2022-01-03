@@ -1,7 +1,7 @@
 """
     using Linked List to implement Stack
 """
-from Linked_list import *
+from Minor_Thesis.Linked_list import *
 
 
 class Stack:

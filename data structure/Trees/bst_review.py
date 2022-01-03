@@ -217,6 +217,10 @@ class BST:
             （3） 出栈时检查right child, 只要有right child, 则继续压栈
             （4） 由于出栈后，又需进行压栈操作，which means 压栈代码需再次被利用。 因此需要利用改变 current_node变量的方式实现循环
             （5） 只要出栈，第一件事即打印value
+
+            update 2021-12-19:
+                看博客"算法随手-树"中的方法， 思路是一样的， 但是代码重写了，更简洁，此处不在更新（是你自己写的）。
+                重写后三个遍历顺序的代码逻辑相同， 便于记忆。
         :return:
         """
         if self.root.value is None:
@@ -241,7 +245,7 @@ class BST:
                     print(cur_node.value)
                 # if stack is empty, then finish
                 else:
-                    return
+                    return 
 
             # when the program reach here, it means that:
             # a. stack is not empty yet
@@ -253,10 +257,45 @@ class BST:
             stack.append(cur_node.right)
             cur_node = cur_node.right
 
-
-
     def post_order_traversal_non_recursive(self):
-        pass
+        """
+         2021-12-19
+        :return:
+        """
+        cur = self.root
+        stack = []
+        result = []
+        prev = self.root
+        # 压至最左
+        # 之所以加 cur is not None是为了最开始能进入循环
+        # 因为stack初始为空， 不加这个条件进不来，同时也不能更改while cur is not None这个条件。
+        while len(stack) != 0 or cur is not None:
+            while cur is not None:
+                stack.append(cur)
+                cur = cur.left
+
+            # 此处不弹出，而是检查
+            cur = stack[-1]
+
+            # 判断append到结果与否
+            # 如果cur.right为空， 那么此时必然输出value，因为当程序到此处时， 已经压至最左
+            # 如果cur.right不为空，但是cur.right == prev， 则代表当前节点的右侧子树已经全部输出，可以输出当前节点了。
+            if cur.right is None or cur.right == prev:
+                # 只要需要append结果： 则更新prev
+                # 弹出stack
+                # 使cur=None实现循环目的
+                result.append(cur.value)
+                stack.pop(-1)
+                prev = cur
+                cur = None
+            else:
+                # 如果不符合上列判断，则两种情况：
+                # 当前节点的右子树还没有被输出， 则此时cur.right不为空， 会继续到第一个while压左
+                # 或者当前节点的cur.right为空，即已经没有右子树， 则会略过第一个while， 继续检查输出与否
+                cur = cur.right
+
+        return result
+
 
     def pre_order_traversal_recursive(self):
         def pre_recursive(node):
@@ -300,7 +339,6 @@ class BST:
         pre_recursive(self.root)
 
 
-
 tree = BST()
 tree.add(10)
 tree.add(6)
@@ -309,4 +347,4 @@ tree.add(4)
 tree.add(8)
 tree.add(12)
 tree.add(16)
-tree.pre_order_traversal_non_recursive()
+tree.in_order_traversal_recursive()

@@ -29,7 +29,7 @@ class Stack:
         self.to_save = []
         self.to_delete_save = []
 
-    def push(self,value):
+    def push(self, value):
         self.to_save.append(value)
         return "pushed"
 

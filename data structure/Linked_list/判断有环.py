@@ -3,7 +3,7 @@
 """
 
 
-from Linked_list import *
+from Minor_Thesis.Linked_list import *
 
 n1 = Node(1)
 n2 = Node(2)
